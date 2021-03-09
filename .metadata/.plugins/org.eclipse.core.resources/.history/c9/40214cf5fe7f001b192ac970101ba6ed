@@ -1,0 +1,31 @@
+package com.id;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.id.entities.Product;
+import com.id.repository.ProductRepository;
+
+@SpringBootApplication
+public class ProductServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ProductServiceApplication.class, args);
+	}
+
+	@Bean
+	 CommandLineRunner start(ProductRepository productRepository) {
+		return args->{
+			 productRepository.save(new Product(null,"karim","moustakilalabi@laposte.net"));
+			 productRepository.save(new Product(null,"karima","moustakila@laposte.net"));
+			 productRepository.save(new Product(null,"albi","moustakilalbi@laposte.net"));
+			 
+			 productRepository.findAll().forEach(c->{
+				 System.out.println(c.toString());
+			 });
+		};
+		 
+	 }
+}

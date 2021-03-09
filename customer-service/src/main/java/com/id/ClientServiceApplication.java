@@ -1,0 +1,31 @@
+package com.id;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.id.entities.Client;
+import com.id.repository.ClientRepository;
+
+@SpringBootApplication
+public class ClientServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ClientServiceApplication.class, args);
+	}
+
+	@Bean
+	 CommandLineRunner start(ClientRepository clientRepository) {
+		return args->{
+			 clientRepository.save(new Client(null,"karim","moustakilalabi@laposte.net"));
+			 clientRepository.save(new Client(null,"karima","moustakila@laposte.net"));
+			 clientRepository.save(new Client(null,"albi","moustakilalbi@laposte.net"));
+			 
+			 clientRepository.findAll().forEach(c->{
+				 System.out.println(c.toString());
+			 });
+		};
+		 
+	 }
+}
